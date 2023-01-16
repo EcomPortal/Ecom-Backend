@@ -25,7 +25,7 @@ public class SubProductServiceImpl implements SubProductService {
 			if (subProductDto != null && subProductDto.getId() == null) {
 				List<SubProduct> subProductByName = subProductRepository
 						.findBySubProductName(subProductDto.getSubProductName());
-				if (subProductByName != null)
+				if (subProductByName.size()>0)
 					return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null,
 							"This Brand name is already exist !!!!");
 				SubProduct subProductSave = subProductDto.convertDtoToEntity();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +28,8 @@ public class SubProductController {
 		return new ResponseEntity<>(customResponse, HttpStatus.valueOf(customResponse.getStatus()));
 	}
 	
-	@GetMapping("/getAll/subProduct")
-	public ResponseEntity<?> getAllSubProductData(@RequestParam @Valid Long parentProductId) {
+	@GetMapping("/getAll/subProduct/{parentProductId}")
+	public ResponseEntity<?> getAllSubProductData(@PathVariable @Valid Long parentProductId) {
 		CustomResponse customResponse = subProductService.getAllSubProduct(parentProductId);
 		return new ResponseEntity<>(customResponse, HttpStatus.valueOf(customResponse.getStatus()));
 	}

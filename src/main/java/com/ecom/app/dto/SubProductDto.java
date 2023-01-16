@@ -11,15 +11,12 @@ public class SubProductDto {
 	private Long id;
 
 	@NotNull(message = "Brand name cannnot be null!!!")
-	@NotEmpty(message = "Brand name cannot be empty!!!")
 	private String subProductName;
 
 	@NotNull(message = "Brand image cannnot be null!!!")
-	@NotEmpty(message = "Brand image cannot be empty!!!")
 	private String imageUrl;
 
 	@NotNull(message = "Parent cannnot be null!!!")
-	@NotEmpty(message = "Brand name cannot be empty!!!")
 	private Long parentProductId;
 
 	public Long getId() {
