@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.app.dto.CustomResponse;
+import com.ecom.app.dto.SubProductAllDetailsDto;
 import com.ecom.app.dto.SubProductDto;
 import com.ecom.app.service.SubProductService;
 
@@ -30,8 +31,8 @@ public class SubProductController {
 	
 	@GetMapping("/getAll/subProduct/{parentProductId}")
 	public ResponseEntity<?> getAllSubProductData(@PathVariable @Valid Long parentProductId) {
-		CustomResponse customResponse = subProductService.getAllSubProduct(parentProductId);
-		return new ResponseEntity<>(customResponse, HttpStatus.valueOf(customResponse.getStatus()));
+		SubProductAllDetailsDto customResponse = subProductService.getAllSubProduct(parentProductId);
+		return new ResponseEntity<>(customResponse, HttpStatus.OK);
 	}
 
 }

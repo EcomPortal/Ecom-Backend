@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.ecom.app.dto.CustomResponse;
+import com.ecom.app.dto.SubProductAllDetailsDto;
 import com.ecom.app.dto.SubProductDto;
 import com.ecom.app.module.SubProduct;
 import com.ecom.app.repository.SubProductRepository;
@@ -41,14 +42,15 @@ public class SubProductServiceImpl implements SubProductService {
 	}
 
 	@Override
-	public CustomResponse getAllSubProduct(Long parentProductId) {
-		List<Object> response = new ArrayList<>();
+	public SubProductAllDetailsDto getAllSubProduct(Long parentProductId) {
+		
 		List<SubProduct> subProductList = subProductRepository.findByParentProductId(parentProductId);
-		response.add(subProductList.get(0).getParentProductId());
+		List<SubProductDto> subProductDtoList = new ArrayList<>();
 		for (SubProduct subProduct : subProductList) {
-			response.add(subProduct.convertEntityToDto());
+			subProductDtoList.add(subProduct.convertEntityToDto());
 		}
-		return new CustomResponse(HttpStatus.OK.value(), response, HttpStatus.OK.name());
+		SubProductAllDetailsDto response = new SubProductAllDetailsDto(subProductList.get(0).getParentProductId().getProductName(),subProductDtoList);
+		return response;
 	}
 
 }
