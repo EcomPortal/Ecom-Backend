@@ -22,7 +22,7 @@ public class ProductController {
 	
 	@GetMapping("/getAll/parent/product")
 	public ResponseEntity<?> getAllParentProduct(){
-		List<ParentProduct> productData=productService.getAllParentProduct();
+		List<ParentProductDto> productData=productService.getAllParentProduct();
 		return new ResponseEntity<>(productData,HttpStatus.OK);
 	}
 	

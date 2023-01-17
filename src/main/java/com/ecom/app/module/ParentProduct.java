@@ -1,11 +1,18 @@
 package com.ecom.app.module;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.ecom.app.dto.ParentProductDto;
+import com.ecom.app.dto.SubProductAllDetailsDto;
 
 @Entity
 @Table(name = "parent_product")
@@ -20,6 +27,9 @@ public class ParentProduct {
 
 	@Column(name = "image_url")
 	private String imageUrl;
+
+	@OneToMany(mappedBy = "parentProductId", targetEntity = SubProduct.class)
+	private List<SubProduct> subProducts;
 
 	public ParentProduct(Long id) {
 		this.id = id;
@@ -54,4 +64,22 @@ public class ParentProduct {
 		this.imageUrl = imageUrl;
 	}
 
+	public List<SubProduct> getSubProducts() {
+		return subProducts;
+	}
+
+	public void setSubProducts(List<SubProduct> subProducts) {
+		this.subProducts = subProducts;
+	}
+	
+	public ParentProductDto convertToParentProductDto() {
+		return new ParentProductDto(this.getId(), this.getProductName(), this.getImageUrl());
+	}
+
+	public SubProductAllDetailsDto convertToSubProductAllDetails() {
+		return new SubProductAllDetailsDto(this.getProductName(),
+				this.getSubProducts() != null
+						? this.getSubProducts().stream().map(e -> e.convertEntityToDto()).collect(Collectors.toList())
+						: null);
+	}
 }
