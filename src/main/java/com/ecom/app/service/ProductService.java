@@ -7,7 +7,7 @@ import com.ecom.app.module.ParentProduct;
 
 public interface ProductService {
 
-	List<ParentProduct> getAllParentProduct();
+	List<ParentProductDto> getAllParentProduct();
 
 	ParentProduct saveParentProduct(ParentProductDto parentProduct);
 
