@@ -1,14 +1,12 @@
 package com.ecom.app.service;
 
-import java.util.List;
-
-import com.ecom.app.dto.ParentProductDto;
-import com.ecom.app.module.ParentProduct;
+import com.ecom.app.dto.ProductDetailsDto;
+import com.ecom.app.dto.ProductDto;
 
 public interface ProductService {
 
-	List<ParentProductDto> getAllParentProduct();
+	ProductDto saveProduct(ProductDto productDto);
 
-	ParentProduct saveParentProduct(ParentProductDto parentProduct);
+	ProductDetailsDto getAllProductDetails(Long subProductId);
 
 }
