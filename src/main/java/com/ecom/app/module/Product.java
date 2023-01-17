@@ -34,6 +34,9 @@ public class Product {
 	@Column(name = "is_active")
 	private Boolean isActive;
 
+	@Column(name = "available_stock")
+	private Integer availableStock;
+
 	@ManyToOne
 	@JoinColumn(name = "sub_product_id")
 	private SubProduct subProductId;
@@ -91,6 +94,14 @@ public class Product {
 		this.isActive = isActive;
 	}
 
+	public Integer getAvailableStock() {
+		return availableStock;
+	}
+
+	public void setAvailableStock(Integer availableStock) {
+		this.availableStock = availableStock;
+	}
+
 	public SubProduct getSubProductId() {
 		return subProductId;
 	}
@@ -100,7 +111,7 @@ public class Product {
 	}
 
 	public Product(Long id, String productName, String modelName, Double price, String imageUrl, Boolean isActive,
-			SubProduct subProductId) {
+			Integer availableStock, SubProduct subProductId) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -108,12 +119,13 @@ public class Product {
 		this.price = price;
 		this.imageUrl = imageUrl;
 		this.isActive = isActive;
+		this.availableStock = availableStock;
 		this.subProductId = subProductId;
 	}
 
 	public ProductDto convertToProductDto() {
-		return new ProductDto(this.getId(), this.getProductName(), this.getModelName(), this.getPrice(),
-				this.getImageUrl(), this.getIsActive(), this.getSubProductId().getId());
+		return new ProductDto(this.getId()!=0?this.getId():null, this.getProductName(), this.getModelName(), this.getPrice(),
+				this.getImageUrl(), this.getIsActive(), this.getAvailableStock(), this.getSubProductId().getId());
 	}
 
 }

@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,15 +23,32 @@ public class ProductController {
 	private ProductService productService;
 
 	@PostMapping("add/product")
-	public ResponseEntity<?> saveSubProductData(@RequestBody @Valid ProductDto productDto) {
+	public ResponseEntity<?> saveProductData(@RequestBody @Valid ProductDto productDto) {
 		ProductDto response = productService.saveProduct(productDto);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/getAll/product/{subProductId}")
-	public ResponseEntity<?> getAllSubProductData(@PathVariable @Valid Long subProductId) {
+	public ResponseEntity<?> getAllProductData(@PathVariable @Valid Long subProductId) {
 		ProductDetailsDto customResponse = productService.getAllProductDetails(subProductId);
 		return new ResponseEntity<>(customResponse, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getById/product/{id}")
+	public ResponseEntity<?> getProductById(@PathVariable @Valid Long id) {
+		ProductDto customResponse = productService.productGetById(id);
+		return new ResponseEntity<>(customResponse, HttpStatus.OK);
+	}
+	@PostMapping("update/product")
+	public ResponseEntity<?> updateProductData(@RequestBody @Valid ProductDto productDto) {
+		ProductDto response = productService.updateProduct(productDto);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("delete/product/{id}")
+	public ResponseEntity<?> deleteProductData(@PathVariable Long id) {
+		String response = productService.deleteProduct(id);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 }

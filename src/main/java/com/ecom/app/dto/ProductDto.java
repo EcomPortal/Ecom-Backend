@@ -25,6 +25,9 @@ public class ProductDto {
 
 	private Boolean isActive;
 
+	@NotNull
+	private Integer availableStock;
+
 	@NotNull(message = "subProduct Id cannot be null!!!")
 	private Long subProductId;
 
@@ -81,6 +84,14 @@ public class ProductDto {
 		this.isActive = isActive;
 	}
 
+	public Integer getAvailableStock() {
+		return availableStock;
+	}
+
+	public void setAvailableStock(Integer availableStock) {
+		this.availableStock = availableStock;
+	}
+
 	public Long getSubProductId() {
 		return subProductId;
 	}
@@ -89,8 +100,11 @@ public class ProductDto {
 		this.subProductId = subProductId;
 	}
 
-	public ProductDto(Long id, String productName, String modelName, Double price, String productImage,
-			Boolean isActive, Long subProductId) {
+	public ProductDto(Long id, @NotNull(message = "Product Name cannot be null!!!") String productName,
+			@NotNull(message = "Model Name cannot be null!!!") String modelName,
+			@NotNull(message = "Price cannot be null!!!") Double price,
+			@NotNull(message = "Product Image cannot be null!!!") String productImage, Boolean isActive,
+			@NotNull Integer availableStock, @NotNull(message = "subProduct Id cannot be null!!!") Long subProductId) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -98,13 +112,14 @@ public class ProductDto {
 		this.price = price;
 		this.productImage = productImage;
 		this.isActive = isActive;
+		this.availableStock = availableStock;
 		this.subProductId = subProductId;
 	}
 
 	public Product convertToProductEntity() {
 		return new Product(this.getId(), this.getProductName(), this.getModelName(), this.getPrice(),
 				this.getProductImage(), this.getIsActive() != null ? this.getIsActive() : true,
-				new SubProduct(this.getSubProductId()));
+				this.getAvailableStock(), new SubProduct(this.getSubProductId()));
 	}
 
 }

@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS product (
   price double,
   image_url text,
   is_active tinyint(1),
+  available_stock int,
   sub_product_id INT,
   PRIMARY KEY (id)
 );

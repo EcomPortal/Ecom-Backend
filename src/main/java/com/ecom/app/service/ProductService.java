@@ -9,4 +9,10 @@ public interface ProductService {
 
 	ProductDetailsDto getAllProductDetails(Long subProductId);
 
+	ProductDto productGetById(Long id);
+
+	ProductDto updateProduct(ProductDto productDto);
+
+	String deleteProduct(Long id);
+
 }

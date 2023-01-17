@@ -1,6 +1,7 @@
 package com.ecom.app.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDto saveProduct(ProductDto productDto) {
 		try {
-			if (productDto != null && productDto.getId() == null) {
+			if (productDto != null && (productDto.getId() == null || productDto.getId()==0)) {
 				List<Product> productList = productRepository.findByModelName(productDto.getModelName());
 				if (productList.size() > 0)
 					throw new RuntimeException("Duplicate ModelName cannot allow!!!");
@@ -41,6 +42,36 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDetailsDto getAllProductDetails(Long subProductId) {
 		return subProductRepository.findById(subProductId).get().convertToProductDetailsDto();
+	}
+
+	@Override
+	public ProductDto productGetById(Long id) {
+		Optional<Product> productById = productRepository.findById(id);
+		return productById.get().convertToProductDto();
+	}
+
+	@Override
+	public ProductDto updateProduct(ProductDto productDto) {
+		try {
+			if (productDto != null && productDto.getId() != null) {
+				List<Product> productList = productRepository.findByModelName(productDto.getModelName());
+				if (productList.size() > 1)
+					throw new RuntimeException("Duplicate ModelName cannot allow!!!");
+				Product productSave = productRepository.save(productDto.convertToProductEntity());
+				return productSave.convertToProductDto();
+			} else {
+				throw new RuntimeException("Check you request!!!");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	@Override
+	public String deleteProduct(Long id) {
+
+		productRepository.deleteById(id);
+		return "Successfully Deleted !!!";
 	}
 
 }
