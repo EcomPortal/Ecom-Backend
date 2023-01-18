@@ -1,15 +1,19 @@
 package com.ecom.app.module;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.ecom.app.dto.ProductDetailsDto;
 import com.ecom.app.dto.SubProductDto;
 
 @Entity
@@ -29,6 +33,9 @@ public class SubProduct {
 	@OneToOne
 	@JoinColumn(name = "parent_product_id")
 	private ParentProduct parentProductId;
+
+	@OneToMany(mappedBy = "subProductId", targetEntity = Product.class)
+	private List<Product> productId;
 
 	public Long getId() {
 		return id;
@@ -62,6 +69,14 @@ public class SubProduct {
 		this.parentProductId = parentProductId;
 	}
 
+	public List<Product> getProductId() {
+		return productId;
+	}
+
+	public void setProductId(List<Product> productId) {
+		this.productId = productId;
+	}
+
 	public SubProduct() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -75,9 +90,20 @@ public class SubProduct {
 		this.parentProductId = parentProductId;
 	}
 
+	public SubProduct(Long id) {
+		this.id = id;
+	}
+
 	public SubProductDto convertEntityToDto() {
 		return new SubProductDto(this.getId(), this.getSubProductName(), this.getImageUrl(),
 				this.getParentProductId().getId());
+	}
+
+	public ProductDetailsDto convertToProductDetailsDto() {
+		return new ProductDetailsDto(this.getSubProductName(), this.getImageUrl(),
+				this.getProductId() != null
+						? this.getProductId().stream().map(e -> e.convertToProductDto()).collect(Collectors.toList())
+						: null);
 	}
 
 }

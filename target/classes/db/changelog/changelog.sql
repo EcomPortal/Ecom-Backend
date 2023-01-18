@@ -34,3 +34,15 @@ CREATE TABLE IF NOT EXISTS sub_product (
   parent_product_id int,
   PRIMARY KEY (id)
 );
+--changeset Dhrutimaya:9090.v3
+CREATE TABLE IF NOT EXISTS product (
+  id bigint NOT NULL AUTO_INCREMENT,
+  product_name varchar(200),
+  model_name varchar(200),
+  price double,
+  image_url text,
+  is_active tinyint(1),
+  available_stock int,
+  sub_product_id INT,
+  PRIMARY KEY (id)
+);
