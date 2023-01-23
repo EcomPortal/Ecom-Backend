@@ -100,7 +100,8 @@ public class SubProduct {
 	}
 
 	public ProductDetailsDto convertToProductDetailsDto() {
-		return new ProductDetailsDto(this.getSubProductName(), this.getImageUrl(),
+		return new ProductDetailsDto(this.getId(), this.getSubProductName(), this.getImageUrl(),
+				this.getParentProductId().getId(),
 				this.getProductId() != null
 						? this.getProductId().stream().map(e -> e.convertToProductDto()).collect(Collectors.toList())
 						: null);

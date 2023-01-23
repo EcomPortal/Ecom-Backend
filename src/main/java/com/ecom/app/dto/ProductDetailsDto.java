@@ -6,6 +6,10 @@ public class ProductDetailsDto {
 
 	private String subProductName;
 
+	private Long id;
+
+	private Long parentId;
+
 	private String subProductImageUrl;
 
 	private List<ProductDto> productList;
@@ -39,11 +43,30 @@ public class ProductDetailsDto {
 		this.productList = productList;
 	}
 
-	public ProductDetailsDto(String subProductName, String subProductImageUrl, List<ProductDto> productList) {
+	public ProductDetailsDto(Long id, String subProductName, String subProductImageUrl, Long parentId,
+			List<ProductDto> productList) {
 		super();
 		this.subProductName = subProductName;
 		this.subProductImageUrl = subProductImageUrl;
 		this.productList = productList;
+		this.id = id;
+		this.parentId = parentId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 }

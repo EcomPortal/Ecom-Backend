@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ecom.app.dto.ProductDetailsDto;
 import com.ecom.app.dto.ProductDto;
 import com.ecom.app.module.Product;
+import com.ecom.app.module.SubProduct;
 import com.ecom.app.repository.ProductRepository;
 import com.ecom.app.repository.SubProductRepository;
 import com.ecom.app.service.ProductService;
@@ -24,24 +25,26 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDto saveProduct(ProductDto productDto) {
-		try {
+//		try {
 			if (productDto != null && (productDto.getId() == null || productDto.getId()==0)) {
-				List<Product> productList = productRepository.findByModelName(productDto.getModelName());
-				if (productList.size() > 0)
-					throw new RuntimeException("Duplicate ModelName cannot allow!!!");
+//				List<Product> productList = productRepository.findByModelName(productDto.getModelName());
+//				if (productList.size() > 0)
+//					throw new RuntimeException("Duplicate ModelName cannot allow!!!");
 				Product productSave = productRepository.save(productDto.convertToProductEntity());
 				return productSave.convertToProductDto();
 			} else {
 				throw new RuntimeException("Check you request!!!");
 			}
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
+//		} catch (Exception e) {
+//			throw new RuntimeException(e.getMessage());
+//		}
 	}
 
 	@Override
 	public ProductDetailsDto getAllProductDetails(Long subProductId) {
-		return subProductRepository.findById(subProductId).get().convertToProductDetailsDto();
+		Optional<SubProduct> optionalSub =  subProductRepository.findById(subProductId);
+		ProductDetailsDto productDetailsDto = optionalSub.get().convertToProductDetailsDto();
+		return productDetailsDto;
 	}
 
 	@Override
