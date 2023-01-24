@@ -81,8 +81,9 @@ public class Cart {
 	}
 
 	public CartDto convertEntityToCartDto() {
-		return new CartDto(this.getId(), this.getProductId().convertToProductDto(), null, this.getUserId(),
-				this.getTotalQuantity(), this.getTotalPrice());
+		return new CartDto(this.getId(), this.getProductId().convertToProductDto(),
+				this.getProductId() != null && this.getProductId().getId() != null ? this.getProductId().getId() : null,
+				this.getUserId(), this.getTotalQuantity(), this.getTotalPrice());
 	}
 
 }

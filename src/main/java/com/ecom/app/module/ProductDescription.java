@@ -70,7 +70,9 @@ public class ProductDescription {
 
 	public ProductDescriptionDto convertProductDescDto() {
 		return new ProductDescriptionDto(this.getId(), this.getImageUrls(), this.getImageUrls().split(","),
-				this.getDescription(), null, this.getProductId().convertToProductDto());
+				this.getDescription(),
+				this.getProductId() != null && this.getProductId().getId() != null ? this.getProductId().getId()
+						: null, this.getProductId().convertToProductDto());
 	}
 
 }
