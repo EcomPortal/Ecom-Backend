@@ -123,9 +123,16 @@ public class Product {
 		this.subProductId = subProductId;
 	}
 
+	public Product(Long id) {
+		this.id = id;
+	}
+
 	public ProductDto convertToProductDto() {
-		return new ProductDto(this.getId()!=0?this.getId():null, this.getProductName(), this.getModelName(), this.getPrice(),
-				this.getImageUrl(), this.getIsActive(), this.getAvailableStock(), this.getSubProductId().getId());
+		return new ProductDto(this.getId() != 0 ? this.getId() : null, this.getProductName(), this.getModelName(),
+				this.getPrice(), this.getImageUrl(), this.getIsActive(), this.getAvailableStock(),
+				this.getSubProductId() != null && this.getSubProductId().getId() != null
+						? this.getSubProductId().getId()
+						: null);
 	}
 
 }

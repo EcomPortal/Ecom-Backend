@@ -7,7 +7,8 @@ import com.ecom.app.module.UserData;
 public class CartDto {
 
 	private Long id;
-	private ProductDto productId;
+	private ProductDto product;
+	private Long productId;
 	private Long userId;
 	private Integer totalQuantity;
 	private Double totalPrice;
@@ -25,11 +26,19 @@ public class CartDto {
 		this.id = id;
 	}
 
-	public ProductDto getProductId() {
+	public ProductDto getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductDto product) {
+		this.product = product;
+	}
+
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(ProductDto productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
@@ -57,9 +66,10 @@ public class CartDto {
 		this.totalPrice = totalPrice;
 	}
 
-	public CartDto(Long id, ProductDto productId, Long userId, Integer totalQuantity, Double totalPrice) {
+	public CartDto(Long id, ProductDto product, Long productId, Long userId, Integer totalQuantity, Double totalPrice) {
 		super();
 		this.id = id;
+		this.product = product;
 		this.productId = productId;
 		this.userId = userId;
 		this.totalQuantity = totalQuantity;
@@ -67,8 +77,8 @@ public class CartDto {
 	}
 
 	public Cart convertDtoToCartEntity() {
-		return new Cart(this.getId(), this.getProductId().convertToProductEntity(), this.getUserId(), this.getTotalQuantity(),
-				this.getTotalPrice());
+		return new Cart(this.getId(), new Product(this.getProductId()), this.getUserId(),
+				this.getTotalQuantity(), this.getTotalPrice());
 	}
 
 }

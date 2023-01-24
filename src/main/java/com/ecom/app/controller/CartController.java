@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,16 +36,16 @@ public class CartController {
 		return new ResponseEntity<>(customResponse, HttpStatus.OK);
 	}
 	
-//	@PostMapping("update/cart")
-//	public ResponseEntity<?> updateCartData(@RequestBody @Valid CartDto cartDto) {
-//		CartDto response = cartService.updateCart(cartDto);
-//		return new ResponseEntity<>(response, HttpStatus.CREATED);
-//	}
-//	
-//	@DeleteMapping("delete/cart/{id}")
-//	public ResponseEntity<?> deleteCartData(@PathVariable Long id) {
-//		String response = cartService.deleteCart(id);
-//		return new ResponseEntity<>(response, HttpStatus.OK);
-//	}
+	@PutMapping("update/cart")
+	public ResponseEntity<?> updateCartData(@RequestBody @Valid CartDto cartDto) {
+		CartDto response = cartService.updateCart(cartDto);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("delete/cart/{id}")
+	public ResponseEntity<?> deleteCartData(@PathVariable Long id) {
+		String response = cartService.deleteCartDetails(id);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 	
 }
