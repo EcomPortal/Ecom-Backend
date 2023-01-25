@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.ecom.app.dto.ProductDescriptionDto;
 import com.ecom.app.dto.ProductDto;
 
 @Entity
@@ -40,6 +42,9 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "sub_product_id")
 	private SubProduct subProductId;
+
+	@OneToOne(mappedBy = "productId", targetEntity = ProductDescription.class)
+	private ProductDescription productDescription;
 
 	public Product() {
 		super();
@@ -110,6 +115,14 @@ public class Product {
 		this.subProductId = subProductId;
 	}
 
+	public ProductDescription getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(ProductDescription productDescription) {
+		this.productDescription = productDescription;
+	}
+
 	public Product(Long id, String productName, String modelName, Double price, String imageUrl, Boolean isActive,
 			Integer availableStock, SubProduct subProductId) {
 		super();
@@ -123,9 +136,40 @@ public class Product {
 		this.subProductId = subProductId;
 	}
 
+	public Product(Long id, String productName, String modelName, Double price, String imageUrl, Boolean isActive,
+			Integer availableStock, SubProduct subProductId, ProductDescription productDescription) {
+		super();
+		this.id = id;
+		this.productName = productName;
+		this.modelName = modelName;
+		this.price = price;
+		this.imageUrl = imageUrl;
+		this.isActive = isActive;
+		this.availableStock = availableStock;
+		this.subProductId = subProductId;
+		this.productDescription = productDescription;
+	}
+
+	public Product(Long id) {
+		this.id = id;
+	}
+
 	public ProductDto convertToProductDto() {
-		return new ProductDto(this.getId()!=0?this.getId():null, this.getProductName(), this.getModelName(), this.getPrice(),
-				this.getImageUrl(), this.getIsActive(), this.getAvailableStock(), this.getSubProductId().getId());
+		return new ProductDto(this.getId() != 0 ? this.getId() : null, this.getProductName(), this.getModelName(),
+				this.getPrice(), this.getImageUrl(), this.getIsActive(), this.getAvailableStock(),
+				this.getSubProductId() != null && this.getSubProductId().getId() != null
+						? this.getSubProductId().getId()
+						: null);
+	}
+
+	public ProductDescriptionDto convertToProductDescriptionDtoResponse() {
+		return new ProductDescriptionDto(
+				this.getProductDescription() != null && this.getProductDescription().getId() != null
+						? this.getProductDescription().getId():null,
+						this.getProductDescription() != null && this.getProductDescription().getImageUrls() != null
+								? this.getProductDescription().getImageUrls():null, this.getProductDescription() != null && this.getProductDescription().getImageUrls() != null
+										? this.getProductDescription().getImageUrls().split(","):null, this.getProductDescription() != null && this.getProductDescription().getDescription() != null
+												? this.getProductDescription().getDescription():null, this.getId(), convertToProductDto());
 	}
 
 }

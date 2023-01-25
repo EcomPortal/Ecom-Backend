@@ -1,6 +1,5 @@
 package com.ecom.app.serviceImpl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +56,9 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDto updateProduct(ProductDto productDto) {
 		try {
 			if (productDto != null && productDto.getId() != null) {
-				List<Product> productList = productRepository.findByModelName(productDto.getModelName());
-				if (productList.size() > 1)
-					throw new RuntimeException("Duplicate ModelName cannot allow!!!");
+//				List<Product> productList = productRepository.findByModelName(productDto.getModelName());
+//				if (productList.size() > 1)
+//					throw new RuntimeException("Duplicate ModelName cannot allow!!!");
 				Product productSave = productRepository.save(productDto.convertToProductEntity());
 				return productSave.convertToProductDto();
 			} else {
