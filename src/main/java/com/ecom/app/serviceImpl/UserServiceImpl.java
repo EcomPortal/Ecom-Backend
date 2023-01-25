@@ -23,6 +23,7 @@ import com.ecom.app.repository.CredentialMasterRepository;
 import com.ecom.app.repository.UserDataRepository;
 import com.ecom.app.security.JwtTokenUtil;
 import com.ecom.app.security.JwtUserDetailsService;
+import com.ecom.app.service.EmailServiceVM;
 import com.ecom.app.service.UserService;
 
 @Service
@@ -40,6 +41,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+	
+	@Autowired
+	private EmailServiceVM emailServiceVM;
 
 	@Override
 	public LoginResponse login(LoginRequest loginRequest) throws Exception {
@@ -90,8 +94,10 @@ public class UserServiceImpl implements UserService {
 					return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null,
 							"Email and phone number cannot be duplicate !!!");
 			}
+			emailServiceVM.sendNewWelcomeLetter("Welcome to Ecom Portal", signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getUserName());
 			CredentialMaster credentialMasterSave = new CredentialMaster(null, signUpRequest.getUserName(),
 					UserType.Customer, signUpRequest.getEmail(), signUpRequest.getPhoneNo(), null, null);
+			
 			credentialMasterSave.setPassword(credentialMasterSave.passwordEncoder(signUpRequest.getPassword()));
 			UserData userDataSave = new UserData(null, signUpRequest.getUserName(), signUpRequest.getEmail(),
 					signUpRequest.getPhoneNo(), true);
