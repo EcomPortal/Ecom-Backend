@@ -94,6 +94,9 @@ public class Cart {
 				this.getProductId() != null && this.getProductId().getModelName() != null
 						? this.getProductId().getModelName()
 						: null,
+				this.getProductId() != null && this.getProductId().getAvailableStock() != null
+						? this.getProductId().getAvailableStock()
+						: null,
 				this.getUserId(), this.getTotalQuantity(), this.getTotalPrice());
 	}
 

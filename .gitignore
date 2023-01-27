@@ -4,3 +4,6 @@ target/
 *.class
 *.properties
 *.prefs
+*.class
+target/classes/com/ecom/app/module/Cart.class
+target/classes/com/ecom/app/dto/CartDto.class

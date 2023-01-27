@@ -12,6 +12,7 @@ public class CartDto {
 	private String productName;
 	private String productImage;
 	private String productModel;
+	private Integer productAvailableStock;
 	private Long userId;
 	private Integer totalQuantity;
 	private Double totalPrice;
@@ -69,6 +70,14 @@ public class CartDto {
 		this.productModel = productModel;
 	}
 
+	public Integer getProductAvailableStock() {
+		return productAvailableStock;
+	}
+
+	public void setProductAvailableStock(Integer productAvailableStock) {
+		this.productAvailableStock = productAvailableStock;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -94,7 +103,7 @@ public class CartDto {
 	}
 
 	public CartDto(Long id, Long productId, Double productPrice, String productName, String productImage,
-			String productModel, Long userId, Integer totalQuantity, Double totalPrice) {
+			String productModel, Integer productAvailableStock, Long userId, Integer totalQuantity, Double totalPrice) {
 		super();
 		this.id = id;
 		this.productId = productId;
@@ -102,6 +111,7 @@ public class CartDto {
 		this.productName = productName;
 		this.productImage = productImage;
 		this.productModel = productModel;
+		this.productAvailableStock = productAvailableStock;
 		this.userId = userId;
 		this.totalQuantity = totalQuantity;
 		this.totalPrice = totalPrice;
