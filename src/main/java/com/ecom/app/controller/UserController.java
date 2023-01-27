@@ -46,6 +46,12 @@ public class UserController {
 	@PostMapping("/v1/forgetPassword")
 	private ResponseEntity<?> forgetPassword(@RequestBody ForgetPasswordRequestDto forgetPassword){
 		CustomResponse response=userService.forgetPassword(forgetPassword);
-		return new ResponseEntity<>(response,HttpStatus.OK);
+		return new ResponseEntity<>(response,HttpStatus.valueOf(response.getStatus()));
+	}
+	
+	@PostMapping("/v1/generateOtp")
+	private ResponseEntity<?> generateOtp(@RequestBody String email){
+		userService.otpGenerator(email);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

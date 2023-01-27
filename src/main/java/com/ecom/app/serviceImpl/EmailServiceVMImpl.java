@@ -30,8 +30,26 @@ public class EmailServiceVMImpl implements EmailServiceVM {
 //            
 			helper.setTo(email);
 			helper.setSubject(subject);
-			helper.setText("Here Is Your LoginDetails.." + " \n\nUsername:[" + email + "] \n\nPassword:[" + defaultPass
-					+ "] \n\nThanks");
+			helper.setText("Here Is Your LoginDetails.." + " \n\nUsername: " + email + " \n\nPassword: " + defaultPass
+					+ " \n\nThanks");
+			javaMailService.send(mailMessage);
+//           
+			// send(mailMessage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void sendOtp(String subject, String email, String otp) {
+		try {
+			MimeMessage mailMessage = javaMailService.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true);
+//            
+			helper.setTo(email);
+			helper.setSubject(subject);
+			helper.setText("Here Is Your OTP(One Time Password).." + " \n\nUsername: " + email + " \n\nOTP: " + otp
+					+ " \n\nThanks");
 			javaMailService.send(mailMessage);
 //           
 			// send(mailMessage);

@@ -7,8 +7,11 @@ import com.ecom.app.module.UserData;
 public class CartDto {
 
 	private Long id;
-	private ProductDto product;
 	private Long productId;
+	private Double productPrice;
+	private String productName;
+	private String productImage;
+	private String productModel;
 	private Long userId;
 	private Integer totalQuantity;
 	private Double totalPrice;
@@ -26,20 +29,44 @@ public class CartDto {
 		this.id = id;
 	}
 
-	public ProductDto getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductDto product) {
-		this.product = product;
-	}
-
 	public Long getProductId() {
 		return productId;
 	}
 
 	public void setProductId(Long productId) {
 		this.productId = productId;
+	}
+
+	public Double getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(Double productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
+
+	public String getProductModel() {
+		return productModel;
+	}
+
+	public void setProductModel(String productModel) {
+		this.productModel = productModel;
 	}
 
 	public Long getUserId() {
@@ -66,19 +93,23 @@ public class CartDto {
 		this.totalPrice = totalPrice;
 	}
 
-	public CartDto(Long id, ProductDto product, Long productId, Long userId, Integer totalQuantity, Double totalPrice) {
+	public CartDto(Long id, Long productId, Double productPrice, String productName, String productImage,
+			String productModel, Long userId, Integer totalQuantity, Double totalPrice) {
 		super();
 		this.id = id;
-		this.product = product;
 		this.productId = productId;
+		this.productPrice = productPrice;
+		this.productName = productName;
+		this.productImage = productImage;
+		this.productModel = productModel;
 		this.userId = userId;
 		this.totalQuantity = totalQuantity;
 		this.totalPrice = totalPrice;
 	}
 
 	public Cart convertDtoToCartEntity() {
-		return new Cart(this.getId(), new Product(this.getProductId()), this.getUserId(),
-				this.getTotalQuantity(), this.getTotalPrice());
+		return new Cart(this.getId(), new Product(this.getProductId()), this.getUserId(), this.getTotalQuantity(),
+				this.getTotalPrice());
 	}
 
 }
