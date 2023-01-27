@@ -18,13 +18,16 @@ import com.ecom.app.dto.SignUpRequest;
 import com.ecom.app.enums.UserType;
 import com.ecom.app.exception.UnauthorizedException;
 import com.ecom.app.module.CredentialMaster;
+import com.ecom.app.module.EmailOtp;
 import com.ecom.app.module.UserData;
 import com.ecom.app.repository.CredentialMasterRepository;
+import com.ecom.app.repository.EmailOtpRepository;
 import com.ecom.app.repository.UserDataRepository;
 import com.ecom.app.security.JwtTokenUtil;
 import com.ecom.app.security.JwtUserDetailsService;
 import com.ecom.app.service.EmailServiceVM;
 import com.ecom.app.service.UserService;
+import com.ecom.app.util.GenerateRandomCode;
 
 @Service
 @Transactional
@@ -41,9 +44,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-	
+
 	@Autowired
 	private EmailServiceVM emailServiceVM;
+
+	@Autowired
+	private EmailOtpRepository emailOtpRepository;
 
 	@Override
 	public LoginResponse login(LoginRequest loginRequest) throws Exception {
@@ -94,10 +100,11 @@ public class UserServiceImpl implements UserService {
 					return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null,
 							"Email and phone number cannot be duplicate !!!");
 			}
-			emailServiceVM.sendNewWelcomeLetter("Welcome to Ecom Portal", signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getUserName());
+			emailServiceVM.sendNewWelcomeLetter("Welcome to Ecom Portal", signUpRequest.getEmail(),
+					signUpRequest.getPassword(), signUpRequest.getUserName());
 			CredentialMaster credentialMasterSave = new CredentialMaster(null, signUpRequest.getUserName(),
 					UserType.Customer, signUpRequest.getEmail(), signUpRequest.getPhoneNo(), null, null);
-			
+
 			credentialMasterSave.setPassword(credentialMasterSave.passwordEncoder(signUpRequest.getPassword()));
 			UserData userDataSave = new UserData(null, signUpRequest.getUserName(), signUpRequest.getEmail(),
 					signUpRequest.getPhoneNo(), true);
@@ -118,18 +125,45 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public CustomResponse forgetPassword(ForgetPasswordRequestDto forgetPassword) {
-		Optional<CredentialMaster> userData=credentialMasterRepository.findByEmail(forgetPassword.getEmail());
-		if(userData!=null && !userData.isEmpty()) {
-			if(forgetPassword.getPassword().equals(forgetPassword.getRetypePassword())) {
-				userData.get().setPassword(userData.get().passwordEncoder(forgetPassword.getPassword()));
+		Optional<CredentialMaster> userData = credentialMasterRepository.findByEmail(forgetPassword.getEmail());
+		Optional<EmailOtp> otp = emailOtpRepository.findByEmail(forgetPassword.getEmail());
+		if (userData != null && !userData.isEmpty()) {
+			if (otp.get().getOtp().equals(forgetPassword.getOtp())) {
+				if (forgetPassword.getPassword().equals(forgetPassword.getRetypePassword())) {
+					userData.get().setPassword(userData.get().passwordEncoder(forgetPassword.getPassword()));
+				}
+			}else {
+				return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null, "Enter a valid otp !!!!");
 			}
-			
+
 		}
-		CustomResponse response=new CustomResponse();
-		CredentialMaster master=credentialMasterRepository.save(userData.get());
+		CustomResponse response = new CustomResponse();
+		CredentialMaster master = credentialMasterRepository.save(userData.get());
 		response.setMessage("Password Reset Succesful..");
 		response.setStatus(HttpStatus.OK.value());
 		return response;
+	}
+
+	@Override
+	@Transactional
+	public void otpGenerator(String email) {
+		Optional<CredentialMaster> emaiFound = credentialMasterRepository.findByEmail(email);
+		String.valueOf(GenerateRandomCode.getRandomNumber(111111, 999999));
+		Optional<EmailOtp> otp = emailOtpRepository.findByEmail(email);
+		EmailOtp generatedOtp = new EmailOtp();
+		if(otp.isPresent()) {
+			generatedOtp = otp.get();
+			generatedOtp.setOtp(String.valueOf(GenerateRandomCode.getRandomNumber(111111, 999999)));
+			
+		}else {
+			generatedOtp = new EmailOtp(null, email, String.valueOf(GenerateRandomCode.getRandomNumber(111111, 999999)));
+		}
+		generatedOtp = emailOtpRepository.save(generatedOtp);
+		if (emaiFound.isPresent()) {
+			emailServiceVM.sendOtp("Forget password OTP For Ecom Portal", email, generatedOtp.getOtp());
+		} else {
+			throw new RuntimeException("Enter a valid Email!!!");
+		}
 	}
 
 }

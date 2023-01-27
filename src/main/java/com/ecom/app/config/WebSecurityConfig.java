@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/user/v1/signUp", "/swagger-resources/**","/swagger-ui/**","/v2/api-docs","/user/v1/forgetPassword");
+		web.ignoring().antMatchers("/user/v1/signUp", "/swagger-resources/**","/swagger-ui/**","/v2/api-docs","/user/v1/forgetPassword","/user/v1/generateOtp");
 	}
 
 	@Bean

@@ -5,6 +5,7 @@ public class ForgetPasswordRequestDto {
 	private String email;
 	private String password;
 	private String retypePassword;
+	private String otp;
 
 	public String getEmail() {
 		return email;
@@ -28,6 +29,14 @@ public class ForgetPasswordRequestDto {
 
 	public void setRetypePassword(String retypePassword) {
 		this.retypePassword = retypePassword;
+	}
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
 	}
 
 }

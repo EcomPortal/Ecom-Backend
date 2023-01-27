@@ -19,8 +19,7 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	private CartRepository cartRepository;
-	
-	
+
 	@Autowired
 	private ProductRepository productRepository;
 
@@ -29,8 +28,7 @@ public class CartServiceImpl implements CartService {
 		Cart cartSave = cartDto.convertDtoToCartEntity();
 		Optional<Product> optionalProduct = productRepository.findById(cartDto.getProductId());
 		Cart cartDB = cartRepository.findByUserIdAndProductId(cartDto.getUserId(), cartDto.getProductId());
-		Double totalPrice = cartDto.getProduct() != null && cartDto.getProduct().getPrice() != null
-				? (cartDto.getProduct().getPrice()) * cartDto.getTotalQuantity()
+		Double totalPrice = cartDto.getProductPrice() != null ? (cartDto.getProductPrice()) * cartDto.getTotalQuantity()
 				: null;
 		if (cartDB != null) {
 			cartSave.setTotalPrice(cartDB.getTotalPrice() + totalPrice);
@@ -39,7 +37,7 @@ public class CartServiceImpl implements CartService {
 		} else {
 			cartSave.setTotalPrice(totalPrice);
 		}
-		if(cartSave.getTotalQuantity()>optionalProduct.get().getAvailableStock()) {
+		if (cartSave.getTotalQuantity() > optionalProduct.get().getAvailableStock()) {
 			throw new RuntimeException("Unable to add that much quantity to cart !!!!");
 		}
 		CartDto cartDtoResponse = cartRepository.save(cartSave).convertEntityToCartDto();
@@ -52,20 +50,20 @@ public class CartServiceImpl implements CartService {
 				.toList();
 		return cartDtoResponse;
 	}
-	
+
 	@Override
 	public String deleteCartDetails(Long id) {
 
 		cartRepository.deleteById(id);
 		return "Successfully Deleted !!!";
-	} 
-	
+	}
+
 	@Override
 	public CartDto updateCart(CartDto cartDto) {
 		try {
 			if (cartDto != null && cartDto.getId() != null) {
 				Optional<Product> optionalProduct = productRepository.findById(cartDto.getProductId());
-				if(cartDto.getTotalQuantity()>optionalProduct.get().getAvailableStock()) {
+				if (cartDto.getTotalQuantity() > optionalProduct.get().getAvailableStock()) {
 					throw new RuntimeException("Unable to add that much quantity to cart !!!!");
 				}
 				Cart cartSave = cartRepository.save(cartDto.convertDtoToCartEntity());

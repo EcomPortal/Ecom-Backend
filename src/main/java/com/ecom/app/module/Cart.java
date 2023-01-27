@@ -81,8 +81,19 @@ public class Cart {
 	}
 
 	public CartDto convertEntityToCartDto() {
-		return new CartDto(this.getId(), this.getProductId().convertToProductDto(),
+		return new CartDto(this.getId(),
 				this.getProductId() != null && this.getProductId().getId() != null ? this.getProductId().getId() : null,
+				this.getProductId() != null && this.getProductId().getPrice() != null ? this.getProductId().getPrice()
+						: null,
+				this.getProductId() != null && this.getProductId().getProductName() != null
+						? this.getProductId().getProductName()
+						: null,
+				this.getProductId() != null && this.getProductId().getImageUrl() != null
+						? this.getProductId().getImageUrl()
+						: null,
+				this.getProductId() != null && this.getProductId().getModelName() != null
+						? this.getProductId().getModelName()
+						: null,
 				this.getUserId(), this.getTotalQuantity(), this.getTotalPrice());
 	}
 

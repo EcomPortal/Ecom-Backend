@@ -14,4 +14,6 @@ public interface UserService {
 
 	CustomResponse forgetPassword(ForgetPasswordRequestDto forgetPassword);
 
+	void otpGenerator(String email);
+
 }
