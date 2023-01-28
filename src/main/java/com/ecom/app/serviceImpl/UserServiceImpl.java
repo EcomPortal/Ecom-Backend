@@ -2,9 +2,11 @@ package com.ecom.app.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailOtpRepository emailOtpRepository;
+	
 
 	@Override
 	public LoginResponse login(LoginRequest loginRequest) throws Exception {
@@ -100,12 +103,13 @@ public class UserServiceImpl implements UserService {
 					return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null,
 							"Email and phone number cannot be duplicate !!!");
 			}
+			String defaultPassword=UUID.randomUUID().toString();
 			emailServiceVM.sendNewWelcomeLetter("Welcome to Ecom Portal", signUpRequest.getEmail(),
-					signUpRequest.getPassword(), signUpRequest.getUserName());
+					defaultPassword, signUpRequest.getUserName());
 			CredentialMaster credentialMasterSave = new CredentialMaster(null, signUpRequest.getUserName(),
 					UserType.Customer, signUpRequest.getEmail(), signUpRequest.getPhoneNo(), null, null);
 
-			credentialMasterSave.setPassword(credentialMasterSave.passwordEncoder(signUpRequest.getPassword()));
+			credentialMasterSave.setPassword(credentialMasterSave.passwordEncoder(defaultPassword));
 			UserData userDataSave = new UserData(null, signUpRequest.getUserName(), signUpRequest.getEmail(),
 					signUpRequest.getPhoneNo(), true);
 			userDataSave = userDataRepository.save(userDataSave);
@@ -121,6 +125,11 @@ public class UserServiceImpl implements UserService {
 			return new CustomResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), null,
 					"Register user service goes wrong.");
 		}
+	}
+
+	private String generatePassword() {
+		
+		return null;
 	}
 
 	@Override

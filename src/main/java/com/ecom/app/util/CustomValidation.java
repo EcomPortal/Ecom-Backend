@@ -14,8 +14,6 @@ public class CustomValidation {
 			return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null, "Please provide Email.");
 		if(signUpRequest.getPhoneNo() == null)
 			return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null, "Please provide Phone Number.");
-		if(signUpRequest.getPassword() == null)
-			return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null, "Please provide Password.");
 		return new CustomResponse(HttpStatus.OK.value(), null, HttpStatus.OK.name());
 	}
 

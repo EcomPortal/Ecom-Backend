@@ -4,3 +4,8 @@ target/
 *.class
 *.properties
 *.prefs
+target/classes/application.properties
+target/classes/com/ecom/app/dto/SignUpRequest.class
+target/classes/com/ecom/app/serviceImpl/UserServiceImpl.class
+target/classes/com/ecom/app/util/CustomValidation.class
+target/classes/META-INF/maven/com.ecom/Ecom-Login-Service/pom.properties
