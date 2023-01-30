@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 					return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null,
 							"Email and phone number cannot be duplicate !!!");
 			}
-			String defaultPassword=UUID.randomUUID().toString();
+			String defaultPassword=GenerateRandomCode.randomString();
 			emailServiceVM.sendNewWelcomeLetter("Welcome to Ecom Portal", signUpRequest.getEmail(),
 					defaultPassword, signUpRequest.getUserName());
 			CredentialMaster credentialMasterSave = new CredentialMaster(null, signUpRequest.getUserName(),

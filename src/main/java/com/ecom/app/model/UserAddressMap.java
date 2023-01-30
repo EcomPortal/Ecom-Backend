@@ -6,8 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.ecom.app.dto.UserAddressMapDto;
+import com.ecom.app.dto.UserAddressMapResponseDto;
 
 @Entity
 @Table(name = "user_address_map")
@@ -25,7 +29,7 @@ public class UserAddressMap {
 	@JoinColumn(name = "state_id")
 	private State state;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserData user;
 
@@ -135,4 +139,19 @@ public class UserAddressMap {
 		// TODO Auto-generated constructor stub
 	}
 
+	public UserAddressMapDto convertUserAddressMapDto() {
+		return new UserAddressMapDto(this.getId(),
+				this.getCity() != null && this.getCity().getId() != null ? this.getCity().getId() : null,
+				this.getState() != null && this.getState().getId() != null ? this.getState().getId() : null,
+				this.getUser() != null && this.getUser().getId() != null ? this.getUser().getId() : null,
+				this.getAddress(), this.getPhone(), this.getName(), this.getNearByLocationAddress(), this.getPincode());
+	}
+
+	public UserAddressMapResponseDto convertToUserAddressMapResponseDto() {
+
+		return new UserAddressMapResponseDto(this.getId() != null ? this.getId() : null,
+				(this.getName() + ", " + this.getAddress() + ", " + this.getCity().getCityName() + ", "
+						+ this.getState().getStateName() + ", " + this.getNearByLocationAddress() + ", "
+						+ this.getPhone() + ", " + +this.getPincode()).toString());
+	}
 }

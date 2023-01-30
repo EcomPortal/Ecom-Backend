@@ -60,4 +60,8 @@ public class City {
 		// TODO Auto-generated constructor stub
 	}
 
+	public City(Long id) {
+		this.id=id;
+	}
+
 }

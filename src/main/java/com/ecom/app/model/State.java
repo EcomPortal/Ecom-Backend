@@ -45,4 +45,8 @@ public class State {
 		// TODO Auto-generated constructor stub
 	}
 
+	public State(Long id) {
+		this.id=id;
+	}
+
 }

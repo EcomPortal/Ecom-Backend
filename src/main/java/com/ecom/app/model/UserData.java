@@ -72,4 +72,8 @@ public class UserData {
 		this.isActive = isActive;
 	}
 
+	public UserData(Long id) {
+		this.id=id;
+	}
+
 }
