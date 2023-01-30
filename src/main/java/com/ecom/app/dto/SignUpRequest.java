@@ -3,7 +3,6 @@ package com.ecom.app.dto;
 public class SignUpRequest {
 
 	private String email;
-	private String password;
 	private String userName;
 	private String phoneNo;
 
@@ -15,13 +14,7 @@ public class SignUpRequest {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 
 	public String getUserName() {
 		return userName;
@@ -44,10 +37,9 @@ public class SignUpRequest {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SignUpRequest(String email, String password, String userName, String phoneNo) {
+	public SignUpRequest(String email, String userName, String phoneNo) {
 		super();
 		this.email = email;
-		this.password = password;
 		this.userName = userName;
 		this.phoneNo = phoneNo;
 	}
