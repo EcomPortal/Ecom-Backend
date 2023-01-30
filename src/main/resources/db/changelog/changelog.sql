@@ -60,12 +60,17 @@ state_id int ,
 city_name varchar(30)
 );
 
---changeset Manoranjan:181919001
+--changeset Manoranjan:181919002
 create table if not exists user_address_map(
 id int auto_increment primary key,
 city_id int,
 state_id int,
 address varchar(255),
-user_id int
+user_id int,
+phone varchar(10),
+name varchar(30),
+near_by_loaction_address varchar(100),
+pincode int
 );
+
 

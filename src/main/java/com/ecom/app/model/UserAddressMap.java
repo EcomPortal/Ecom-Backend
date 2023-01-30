@@ -32,6 +32,18 @@ public class UserAddressMap {
 	@Column(name = "address")
 	private String address;
 
+	@Column(name = "phone")
+	private String phone;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "near_by_loaction_address")
+	private String nearByLocationAddress;
+
+	@Column(name = "pincode")
+	private Integer pincode;
+
 	public Long getId() {
 		return id;
 	}
@@ -72,13 +84,50 @@ public class UserAddressMap {
 		this.address = address;
 	}
 
-	public UserAddressMap(Long id, City city, State state, UserData user, String address) {
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNearByLocationAddress() {
+		return nearByLocationAddress;
+	}
+
+	public void setNearByLocationAddress(String nearByLocationAddress) {
+		this.nearByLocationAddress = nearByLocationAddress;
+	}
+
+	public Integer getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(Integer pincode) {
+		this.pincode = pincode;
+	}
+
+	public UserAddressMap(Long id, City city, State state, UserData user, String address, String phone, String name,
+			String nearByLocationAddress, Integer pincode) {
 		super();
 		this.id = id;
 		this.city = city;
 		this.state = state;
 		this.user = user;
 		this.address = address;
+		this.phone = phone;
+		this.name = name;
+		this.nearByLocationAddress = nearByLocationAddress;
+		this.pincode = pincode;
 	}
 
 	public UserAddressMap() {
