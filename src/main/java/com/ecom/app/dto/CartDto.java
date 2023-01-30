@@ -1,8 +1,8 @@
 package com.ecom.app.dto;
 
-import com.ecom.app.module.Cart;
-import com.ecom.app.module.Product;
-import com.ecom.app.module.UserData;
+import com.ecom.app.model.Cart;
+import com.ecom.app.model.Product;
+import com.ecom.app.model.UserData;
 
 public class CartDto {
 

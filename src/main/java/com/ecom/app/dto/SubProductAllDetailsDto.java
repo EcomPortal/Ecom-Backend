@@ -2,7 +2,7 @@ package com.ecom.app.dto;
 
 import java.util.List;
 
-import com.ecom.app.module.ParentProduct;
+import com.ecom.app.model.ParentProduct;
 
 public class SubProductAllDetailsDto {
 

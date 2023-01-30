@@ -1,4 +1,4 @@
-package com.ecom.app.module;
+package com.ecom.app.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

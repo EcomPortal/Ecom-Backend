@@ -9,7 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 import com.ecom.app.enums.UserType;
-import com.ecom.app.module.CredentialMaster;
+import com.ecom.app.model.CredentialMaster;
 import com.ecom.app.repository.CredentialMasterRepository;
 
 /**

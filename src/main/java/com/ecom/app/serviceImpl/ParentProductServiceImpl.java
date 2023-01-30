@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ecom.app.dto.ParentProductDto;
-import com.ecom.app.module.ParentProduct;
+import com.ecom.app.model.ParentProduct;
 import com.ecom.app.repository.ParentProductRepository;
 import com.ecom.app.service.ParentProductService;
 

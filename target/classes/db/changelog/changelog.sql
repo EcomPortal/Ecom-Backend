@@ -46,3 +46,26 @@ CREATE TABLE IF NOT EXISTS product (
   sub_product_id INT,
   PRIMARY KEY (id)
 );
+
+--changeset Manoranjan:181919
+create table if not exists state(
+id int auto_increment primary key,
+state_name varchar(30)
+);
+
+--changeset Manoranjan:1819190
+create table if not exists city(
+id int auto_increment primary key,
+state_id int ,
+city_name varchar(30)
+);
+
+--changeset Manoranjan:181919001
+create table if not exists user_address_map(
+id int auto_increment primary key,
+city_id int,
+state_id int,
+address varchar(255),
+user_id int
+);
+

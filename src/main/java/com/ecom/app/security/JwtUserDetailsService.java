@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.ecom.app.enums.UserType;
-import com.ecom.app.module.CredentialMaster;
+import com.ecom.app.model.CredentialMaster;
 import com.ecom.app.repository.CredentialMasterRepository;
 
 

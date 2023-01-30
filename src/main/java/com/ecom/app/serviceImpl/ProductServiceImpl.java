@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.ecom.app.dto.ProductDetailsDto;
 import com.ecom.app.dto.ProductDto;
-import com.ecom.app.module.Product;
-import com.ecom.app.module.SubProduct;
+import com.ecom.app.model.Product;
+import com.ecom.app.model.SubProduct;
 import com.ecom.app.repository.ProductRepository;
 import com.ecom.app.repository.SubProductRepository;
 import com.ecom.app.service.ProductService;
