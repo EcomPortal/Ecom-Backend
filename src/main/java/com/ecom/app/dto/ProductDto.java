@@ -2,8 +2,8 @@ package com.ecom.app.dto;
 
 import javax.validation.constraints.NotNull;
 
-import com.ecom.app.module.Product;
-import com.ecom.app.module.SubProduct;
+import com.ecom.app.model.Product;
+import com.ecom.app.model.SubProduct;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

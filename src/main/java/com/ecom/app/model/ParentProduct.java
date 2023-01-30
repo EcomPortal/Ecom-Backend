@@ -1,4 +1,4 @@
-package com.ecom.app.module;
+package com.ecom.app.model;
 
 import java.util.List;
 import java.util.stream.Collectors;

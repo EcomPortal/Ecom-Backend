@@ -3,8 +3,8 @@ package com.ecom.app.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.ecom.app.module.ParentProduct;
-import com.ecom.app.module.SubProduct;
+import com.ecom.app.model.ParentProduct;
+import com.ecom.app.model.SubProduct;
 
 public class SubProductDto {
 

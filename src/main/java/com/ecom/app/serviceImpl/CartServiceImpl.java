@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.ecom.app.dto.CartDto;
 import com.ecom.app.dto.ProductDto;
-import com.ecom.app.module.Cart;
-import com.ecom.app.module.Product;
+import com.ecom.app.model.Cart;
+import com.ecom.app.model.Product;
 import com.ecom.app.repository.CartRepository;
 import com.ecom.app.repository.ProductRepository;
 import com.ecom.app.service.CartService;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.app.dto.ParentProductDto;
-import com.ecom.app.module.ParentProduct;
+import com.ecom.app.model.ParentProduct;
 import com.ecom.app.service.ParentProductService;
 
 @RestController

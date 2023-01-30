@@ -1,7 +1,7 @@
 package com.ecom.app.dto;
 
-import com.ecom.app.module.Product;
-import com.ecom.app.module.ProductDescription;
+import com.ecom.app.model.Product;
+import com.ecom.app.model.ProductDescription;
 
 public class ProductDescriptionDto {
 
