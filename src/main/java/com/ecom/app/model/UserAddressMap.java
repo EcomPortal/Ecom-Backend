@@ -139,6 +139,10 @@ public class UserAddressMap {
 		// TODO Auto-generated constructor stub
 	}
 
+	public UserAddressMap(Long id) {
+		this.id=id;
+	}
+
 	public UserAddressMapDto convertUserAddressMapDto() {
 		return new UserAddressMapDto(this.getId(),
 				this.getCity() != null && this.getCity().getId() != null ? this.getCity().getId() : null,

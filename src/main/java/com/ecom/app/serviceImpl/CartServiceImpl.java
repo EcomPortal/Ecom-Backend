@@ -31,9 +31,10 @@ public class CartServiceImpl implements CartService {
 		Double totalPrice = cartDto.getProductPrice() != null ? (cartDto.getProductPrice()) * cartDto.getTotalQuantity()
 				: null;
 		if (cartDB != null) {
-			cartSave.setTotalPrice(cartDB.getTotalPrice() + totalPrice);
-			cartSave.setTotalQuantity(cartDB.getTotalQuantity() + cartSave.getTotalQuantity());
-			cartSave.setId(cartDB.getId());
+//			cartSave.setTotalPrice(cartDB.getTotalPrice() + totalPrice);
+//			cartSave.setTotalQuantity(cartDB.getTotalQuantity() + cartSave.getTotalQuantity());
+//			cartSave.setId(cartDB.getId());
+			throw new RuntimeException("Item already present in the cart !!!");
 		} else {
 			cartSave.setTotalPrice(totalPrice);
 		}

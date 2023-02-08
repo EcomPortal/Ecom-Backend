@@ -12,10 +12,10 @@ public class GenerateRandomCode {
 	}
 
 	
-	public static String randomString() {
+	public static String randomString(Integer length) {
         int leftLimit = 48; 
         int rightLimit = 122; 
-        int targetStringLength = 8;
+        int targetStringLength = length;
         Random random = new Random();
         return random.ints(leftLimit, rightLimit + 1).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(targetStringLength)

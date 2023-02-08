@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public CustomResponse registerUser(SignUpRequest signUpRequest) {
 		try {
 			List<CredentialMaster> credentialMasterDBList = credentialMasterRepository
@@ -103,7 +104,7 @@ public class UserServiceImpl implements UserService {
 					return new CustomResponse(HttpStatus.BAD_REQUEST.value(), null,
 							"Email and phone number cannot be duplicate !!!");
 			}
-			String defaultPassword=GenerateRandomCode.randomString();
+			String defaultPassword=GenerateRandomCode.randomString(8);
 			emailServiceVM.sendNewWelcomeLetter("Welcome to Ecom Portal", signUpRequest.getEmail(),
 					defaultPassword, signUpRequest.getUserName());
 			CredentialMaster credentialMasterSave = new CredentialMaster(null, signUpRequest.getUserName(),

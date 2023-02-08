@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.app.dto.ProductDetailsDto;
 import com.ecom.app.dto.ProductDto;
+import com.ecom.app.dto.SearchDto;
 import com.ecom.app.service.ProductService;
 
 @RestController
@@ -48,6 +49,12 @@ public class ProductController {
 	@DeleteMapping("delete/product/{id}")
 	public ResponseEntity<?> deleteProductData(@PathVariable Long id) {
 		String response = productService.deleteProduct(id);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
+	@PostMapping("getAll/sortBy/product")
+	public ResponseEntity<?> sortProductData(@RequestBody @Valid SearchDto searchDto) {
+		ProductDetailsDto response = productService.sortAllProducts(searchDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
