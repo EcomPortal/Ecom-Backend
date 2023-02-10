@@ -2,6 +2,7 @@ package com.ecom.app.service;
 
 import com.ecom.app.dto.ProductDetailsDto;
 import com.ecom.app.dto.ProductDto;
+import com.ecom.app.dto.SearchDto;
 
 public interface ProductService {
 
@@ -14,5 +15,7 @@ public interface ProductService {
 	ProductDto updateProduct(ProductDto productDto);
 
 	String deleteProduct(Long id);
+
+	ProductDetailsDto sortAllProducts(SearchDto searchDto);
 
 }
