@@ -84,5 +84,7 @@ public class Constant {
     public static final Long DJB_COMPANY_ID = 1L;
     public static final String DEVICE_UNLOCK_COMMAND = "(P43,12#aAM)";
     public static final String CUSTOM_COMMAND = "custom";
+    public static final String CANCEL_ORDER = "CANCEL-ORDER";
+    public static final String ORDER_STATUS = "ODER-STATUS";
 
 }
