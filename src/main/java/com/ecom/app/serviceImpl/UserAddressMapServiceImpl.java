@@ -37,5 +37,25 @@ public class UserAddressMapServiceImpl implements UserAddressMapService {
 			return Arrays.asList(new UserAddressMapResponseDto(userId, null));
 		}
 	}
+	
+	@Override
+	public UserAddressMapDto updateUserAddress(UserAddressMapDto userAddressMapDto) {
+		UserAddressMap userAddressMap = userAddressMapDto.convertToUserAddressMap();
+		UserAddressMapDto updateResponse = userAddressMapRepository.save(userAddressMap).convertUserAddressMapDto();
+		return updateResponse;
+	}
+	
+	@Override
+	public UserAddressMapDto getByIdUserAddress(Long id) {
+		UserAddressMap getById = userAddressMapRepository.findById(id).get();
+		UserAddressMapDto getByIdResponse = getById !=null ? getById.convertUserAddressMapDto():null;
+		return getByIdResponse;
+	}
+	
+	@Override
+	public String removeUserAddress(Long id) {
+		userAddressMapRepository.deleteById(id);
+		return "Address Delete Successfuly!!!";
+	}
 
 }

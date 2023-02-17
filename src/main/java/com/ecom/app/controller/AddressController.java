@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,5 +57,20 @@ public class AddressController {
 		List<UserAddressMapResponseDto> response = userAddressMapService.getAllAddressOfAuser(userId);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-
+	
+	@PutMapping("update/address")
+	public ResponseEntity<?> updateAddresByUserId(@RequestBody UserAddressMapDto userAddressMapDto) {
+		UserAddressMapDto response = userAddressMapService.saveUserAddress(userAddressMapDto);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	@GetMapping("get/address/{id}")
+	public ResponseEntity<?> getByIdAddresByUserId(@PathVariable Long id) {
+		UserAddressMapDto response = userAddressMapService.getByIdUserAddress(id);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	@PutMapping("delete/address/{id}")
+	public ResponseEntity<?> deleteAddresByUserId(@PathVariable Long id) {
+		String response = userAddressMapService.removeUserAddress(id);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 }

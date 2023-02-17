@@ -11,4 +11,10 @@ public interface UserAddressMapService {
 
 	List<UserAddressMapResponseDto> getAllAddressOfAuser(Long userId);
 
+	UserAddressMapDto updateUserAddress(UserAddressMapDto userAddressMapDto);
+
+	UserAddressMapDto getByIdUserAddress(Long id);
+
+	String removeUserAddress(Long id);
+
 }
