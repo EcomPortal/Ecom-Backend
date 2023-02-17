@@ -2,6 +2,7 @@ package com.ecom.app.dto;
 
 import java.util.Date;
 
+import com.ecom.app.enums.OrderStatus;
 import com.ecom.app.model.OrderDetails;
 import com.ecom.app.model.Product;
 import com.ecom.app.model.UserAddressMap;
@@ -36,6 +37,8 @@ public class OrderDetailsDto {
 	private String expectedDelivered;
 
 	private String deliveredTo;
+
+	private OrderStatus orderStatus;
 
 	public OrderDetailsDto() {
 		super();
@@ -154,9 +157,17 @@ public class OrderDetailsDto {
 		this.deliveredTo = deliveredTo;
 	}
 
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
 	public OrderDetailsDto(Long id, Long userId, UserData user, Long productId, ProductDto product, String uuid,
 			Long addressId, UserAddressMap address, Long createdBy, Date createdOn, String productName, String orderAt,
-			String expectedDelivered, String delieredTo) {
+			String expectedDelivered, String delieredTo, OrderStatus orderStatus) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -172,6 +183,7 @@ public class OrderDetailsDto {
 		this.orderAt = orderAt;
 		this.expectedDelivered = expectedDelivered;
 		this.deliveredTo = delieredTo;
+		this.orderStatus = orderStatus;
 	}
 
 	public OrderDetailsDto(Long id, Long userId, UserData user, Long productId, ProductDto product, String uuid,

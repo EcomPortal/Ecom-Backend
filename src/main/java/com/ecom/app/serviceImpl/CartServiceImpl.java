@@ -2,6 +2,7 @@ package com.ecom.app.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartDto> getAllCartDetailsByUser(Long id) {
 		List<CartDto> cartDtoResponse = cartRepository.findByUserId(id).stream().map(e -> e.convertEntityToCartDto())
-				.toList();
+				.collect(Collectors.toList());
 		return cartDtoResponse;
 	}
 

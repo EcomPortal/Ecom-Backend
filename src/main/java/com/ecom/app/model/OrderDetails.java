@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import com.ecom.app.constant.Constant;
 import com.ecom.app.dto.OrderDetailsDto;
+import com.ecom.app.enums.OrderStatus;
 import com.ecom.app.util.DateUtil;
 
 @Entity
@@ -42,6 +43,9 @@ public class OrderDetails {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "address_id")
 	private UserAddressMap addressId;
+
+	@Column(name = "order_status")
+	private OrderStatus orderStatus;
 
 	@Column(name = "created_by")
 	private Long createdBy;
@@ -94,6 +98,14 @@ public class OrderDetails {
 		this.addressId = addressId;
 	}
 
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
 	public Long getCreatedBy() {
 		return createdBy;
 	}
@@ -137,9 +149,7 @@ public class OrderDetails {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(this.getCreatedOn());
 		cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 4);
-		if (cal.get(Calendar.HOUR) >= 12)
-			;
-		{
+		if (cal.get(Calendar.AM_PM) != 0) {
 			isAm = false;
 		}
 		Date deleveryDate = cal.getTime();
@@ -162,7 +172,7 @@ public class OrderDetails {
 				this.getAddressId() != null && this.getAddressId().getAddress() != null
 						&& this.getAddressId().getCity() != null && this.getAddressId().getState() != null
 								? this.getAddressId().convertToUserAddressMapResponseDto().getAddress()
-								: null);
+								: null,this.getOrderStatus());
 	}
 
 }

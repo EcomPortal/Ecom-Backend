@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService {
 	public CustomResponse forgetPassword(ForgetPasswordRequestDto forgetPassword) {
 		Optional<CredentialMaster> userData = credentialMasterRepository.findByEmail(forgetPassword.getEmail());
 		Optional<EmailOtp> otp = emailOtpRepository.findByEmail(forgetPassword.getEmail());
-		if (userData != null && !userData.isEmpty()) {
+		if (userData != null && userData.isPresent()) {
 			if (otp.get().getOtp().equals(forgetPassword.getOtp())) {
 				if (forgetPassword.getPassword().equals(forgetPassword.getRetypePassword())) {
 					userData.get().setPassword(userData.get().passwordEncoder(forgetPassword.getPassword()));

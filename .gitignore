@@ -13,3 +13,4 @@ target/classes/com/ecom/app/dto/CartDto.class
 *.properties
 target/classes/META-INF/maven/com.ecom/Ecom-Login-Service/pom.properties
 *.properties
+IronPdfEngine.*

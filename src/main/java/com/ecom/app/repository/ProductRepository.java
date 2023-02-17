@@ -25,5 +25,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	@Modifying
 	@Query(value="update product set available_stock=available_stock-1 where id=?1",nativeQuery = true)
-	void updateAvailableStock(Long productId);
+	void removeFromAvailableStock(Long productId);
+	
+	@Modifying
+	@Query(value="update product set available_stock=available_stock+1 where id=?1",nativeQuery = true)
+	void addInAvailableStock(Long productId);
 }
