@@ -63,7 +63,7 @@ public class AddressController {
 		UserAddressMapDto response = userAddressMapService.saveUserAddress(userAddressMapDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	@GetMapping("get/address/{id}")
+	@GetMapping("get/addresses/{id}")
 	public ResponseEntity<?> getByIdAddresByUserId(@PathVariable Long id) {
 		UserAddressMapDto response = userAddressMapService.getByIdUserAddress(id);
 		return new ResponseEntity<>(response, HttpStatus.OK);

@@ -9,5 +9,5 @@ public class EcomLoginServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EcomLoginServiceApplication.class, args);
 	}
-
+	
 }
