@@ -96,7 +96,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 	@Override
 	public CustomResponse cancleOrder(Long orderId, Long productId) {
 		OrderStatus orderStatus = OrderStatus.ORDER_CANCELLED_BY_USER;
-		orderDetailsRepository.updateStatus(orderId, orderStatus.ordinal());
+		orderDetailsRepository.updateStatus(orderId, orderStatus.ordinal(),new Date());
 		productRepository.addInAvailableStock(productId);
 
 		return new CustomResponse(HttpStatus.OK.value(), null,"Order Cancled Successfully!!!");

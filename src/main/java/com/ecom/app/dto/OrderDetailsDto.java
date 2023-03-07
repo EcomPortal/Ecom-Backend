@@ -39,6 +39,8 @@ public class OrderDetailsDto {
 	private String deliveredTo;
 
 	private OrderStatus orderStatus;
+	
+	private String cancelledOn;
 
 	public OrderDetailsDto() {
 		super();
@@ -165,9 +167,17 @@ public class OrderDetailsDto {
 		this.orderStatus = orderStatus;
 	}
 
+	public String getCancelledOn() {
+		return cancelledOn;
+	}
+
+	public void setCancelledOn(String cancelledOn) {
+		this.cancelledOn = cancelledOn;
+	}
+
 	public OrderDetailsDto(Long id, Long userId, UserData user, Long productId, ProductDto product, String uuid,
 			Long addressId, UserAddressMap address, Long createdBy, Date createdOn, String productName, String orderAt,
-			String expectedDelivered, String delieredTo, OrderStatus orderStatus) {
+			String expectedDelivered, String delieredTo, OrderStatus orderStatus,String cancelledOn) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -184,6 +194,7 @@ public class OrderDetailsDto {
 		this.expectedDelivered = expectedDelivered;
 		this.deliveredTo = delieredTo;
 		this.orderStatus = orderStatus;
+		this.cancelledOn=cancelledOn;
 	}
 
 	public OrderDetailsDto(Long id, Long userId, UserData user, Long productId, ProductDto product, String uuid,

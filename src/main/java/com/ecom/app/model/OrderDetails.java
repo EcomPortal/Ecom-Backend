@@ -52,7 +52,10 @@ public class OrderDetails {
 
 	@Column(name = "created_on")
 	private Date createdOn;
-
+	
+	@Column(name = "cancelled_on")
+	private Date cancelledOn;
+	
 	public OrderDetails() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -122,6 +125,14 @@ public class OrderDetails {
 		this.createdOn = createdOn;
 	}
 
+	public Date getCancelledOn() {
+		return cancelledOn;
+	}
+
+	public void setCancelledOn(Date cancelledOn) {
+		this.cancelledOn = cancelledOn;
+	}
+
 	public OrderDetails(Long id, UserData userId, Product productId, String uuid, UserAddressMap addressId,
 			Long createdBy, Date createdOn,OrderStatus orderStatus) {
 		super();
@@ -156,6 +167,7 @@ public class OrderDetails {
 		Date deleveryDate = cal.getTime();
 		DateFormat dateWIthHour = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		DateFormat dateonly = new SimpleDateFormat("yyyy-MM-dd");
+		
 		return new OrderDetailsDto(this.getId(),
 				this.getUserId() != null && this.getUserId().getId() != null ? this.getUserId().getId() : null,
 				this.getUserId(),
@@ -173,7 +185,7 @@ public class OrderDetails {
 				this.getAddressId() != null && this.getAddressId().getAddress() != null
 						&& this.getAddressId().getCity() != null && this.getAddressId().getState() != null
 								? this.getAddressId().convertToUserAddressMapResponseDto().getAddress()
-								: null,this.getOrderStatus());
+								: null,this.getOrderStatus(),this.cancelledOn==null ?null:(dateWIthHour.format(this.getCancelledOn()).toString()));
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.ecom.app.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +21,7 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Long
 	OrderDetails getById(Long id);
 
 	@Modifying
-	@Query(value="update order_details set order_status=?2 where id =?1",nativeQuery = true)
-	void updateStatus(Long orderId, Integer orderStatus);
+	@Query(value="UPDATE order_details SET order_status = ?2, cancelled_on = ?3 WHERE (id = ?1)",nativeQuery = true)
+	void updateStatus(Long orderId, Integer orderStatus,Date cancelDate);
 
 }
