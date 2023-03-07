@@ -203,7 +203,7 @@ public class OrderDetailsDto {
 
 	public OrderDetails convertToOrderDetails() {
 		return new OrderDetails(this.getId(), new UserData(this.getUserId()), new Product(this.getProductId()),
-				this.getUuid(), new UserAddressMap(this.getAddressId()), this.getUserId(), this.getCreatedOn());
+				this.getUuid(), new UserAddressMap(this.getAddressId()), this.getUserId(), this.getCreatedOn(),this.orderStatus!=null?this.getOrderStatus():OrderStatus.ORDER_PLACED);
 	}
 
 }

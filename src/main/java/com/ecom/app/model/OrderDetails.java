@@ -123,7 +123,7 @@ public class OrderDetails {
 	}
 
 	public OrderDetails(Long id, UserData userId, Product productId, String uuid, UserAddressMap addressId,
-			Long createdBy, Date createdOn) {
+			Long createdBy, Date createdOn,OrderStatus orderStatus) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -132,6 +132,7 @@ public class OrderDetails {
 		this.addressId = addressId;
 		this.createdBy = createdBy;
 		this.createdOn = createdOn;
+		this.orderStatus=orderStatus;
 	}
 
 	public OrderDetailsDto convertToOrderDetailsDto() {
